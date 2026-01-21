@@ -1,5 +1,6 @@
 package Main.java.planner.service;
 
+import Main.java.planner.model.Status;
 import Main.java.planner.model.Task;
 
 import java.util.ArrayList;
@@ -38,6 +39,18 @@ public class TaskSorter {
             }
             sorted.add(expires);
             copy.remove(expires);
+        }
+        return sorted;
+    }
+
+    public static List<Task> sortByStatusDone(List<Task> tasks){
+        List<Task> sorted = new ArrayList<>();
+        List<Task> copy = new ArrayList<>(tasks);
+
+        for (Task task : copy){
+            if(task.getStatus() == Status.DONE){
+                sorted.add(task);
+            }
         }
         return sorted;
     }

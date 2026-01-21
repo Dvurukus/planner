@@ -20,14 +20,17 @@ public class TaskManager {
     }
 
     public void statusDone(Task task) {
-        task.setStatus(Status.DONE);
+        if (!tasks.contains(task)) return ;
+        task.markDone(task);      
     }
 
     public void statusFail(Task task) {
-        task.setStatus(Status.FAIL);
+        if (!tasks.contains(task)) return;
+        task.markFailed(task);
     }
 
     public void statusInProgress(Task task) {
-        task.setStatus(Status.IN_PROGRESS);
+        if(!tasks.contains(task)) return;
+        task.markStart(task);
     }
 }

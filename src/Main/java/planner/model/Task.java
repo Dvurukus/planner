@@ -12,7 +12,8 @@ public class Task {
     private String description;                 //описание задачи
     private LocalDateTime createdAt;            //дата создания задачи
     private LocalDateTime deadLine;             //срок исполнения задачи
-    private Status status;                      //статус поставленной задачи
+    private Status status;  
+    private LocalDateTime complitedAt;              //статус поставленной задачи
 
 
 
@@ -34,8 +35,10 @@ public class Task {
 
     public LocalDateTime getUnFormattedCreatedAt() {return createdAt;}  //не форматированный вывод
     public LocalDateTime getUnFormattedDeadLine() {return deadLine;}    //не форматированный вывод
+    public LocalDateTime getUnformattedComplitedAt() {return complitedAt;}
     public String getFormattedDeadLine() {return DateTimeUtils.format(deadLine);}   //форматированный вывод
     public String getFormattedCreatedAt() {return DateTimeUtils.format(createdAt);} //форматированный вывод
+    public String getFormattedComplitedAt() {return DateTimeUtils.format(complitedAt);}
 
     public Duration getUnFormattedTimeLeft() {return DateTimeUtils.timeLeft(deadLine);} //не форматированный вывод оставшегося времени
     public String getFormattedTimeLeft() {return DateTimeUtils.formatDuration(DateTimeUtils.timeLeft(deadLine));}//форматированный вывод
@@ -56,6 +59,22 @@ public class Task {
     }
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public void markDone(Task task){
+        this.status = Status.DONE;
+        this.complitedAt = LocalDateTime.now();
+        this.deadLine = null;
+    }
+
+    public void markFailed(Task task){
+        this.status = Status.FAIL;
+        this.complitedAt = LocalDateTime.now();
+        this.deadLine = null;
+    }
+
+    public void markStart(Task task){
+        this.status = Status.IN_PROGRESS;
     }
 
 @Override

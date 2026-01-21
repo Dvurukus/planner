@@ -17,6 +17,8 @@ public class TaskPrinter {
     }
 
     public static String format(Task task){
+         if (task.getStatus() == Status.TODO
+        || task.getStatus() == Status.IN_PROGRESS) {
         return """
                 %s
                 %s
@@ -32,6 +34,30 @@ public class TaskPrinter {
                 task.getFormattedCreatedAt(),
                 task.getFormattedDeadLine(),
                 task.getFormattedTimeLeft());
+         } if (task.getStatus() == Status.DONE){
+            return """
+                    %s
+                    %s
+                    Приоритет: %s
+                    Статус: %s
+                    Завершена: %s
+                    """.formatted(task.getName(),
+                    task.getDescription(),
+                    task.getPriority(),
+                    statusToText(task.getStatus()),
+                    task.getFormattedComplitedAt());
+         } if (task.getStatus() == Status.FAIL){
+            return """
+                    %s
+                    %s
+                    Приоритет: %s
+                    Статус: %s
+                    """.formatted(task.getName(),
+                    task.getDescription(),
+                    task.getPriority(),
+                    statusToText(task.getStatus()));
+         }
+         return " ";
     }
 
     public static void print(Task task){                    //Печать одной задачи
