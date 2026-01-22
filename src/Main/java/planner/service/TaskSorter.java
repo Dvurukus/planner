@@ -54,4 +54,26 @@ public class TaskSorter {
         }
         return sorted;
     }
+
+    public static List<Task> sortByStatusFailed(List<Task> tasks){
+        List<Task> sorted = new ArrayList<>();
+        List<Task> copy = new ArrayList<>(tasks);
+
+        for (Task task : copy){
+            if (task.getStatus() == Status.FAIL){
+                sorted.add(task);
+            }
+        }
+        return sorted;
+    }
+    
+    public static List<Task> sortByStatusInProgress(List<Task> tasks){
+        List<Task> sorted = new ArrayList<>();
+        List<Task> copy = new ArrayList<>(tasks);
+
+        for (Task task : tasks){
+            if (task.getStatus() == )
+        }
+
+    }
 }

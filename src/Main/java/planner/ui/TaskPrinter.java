@@ -2,6 +2,7 @@ package Main.java.planner.ui;
 
 import Main.java.planner.model.Status;
 import Main.java.planner.model.Task;
+import Main.java.planner.service.TaskSorter;
 
 import java.util.List;
 
@@ -64,13 +65,25 @@ public class TaskPrinter {
             System.out.println(format(task));
     }
 
-    public static void printList(List<Task> task){          //Печать списка
-        if (task.isEmpty() || task == null) {
+    public static void printList(List<Task> tasks){          //Печать списка
+        if (tasks.isEmpty() || tasks == null) {
             System.out.println("Список пуст!");
             return;
         }
-        for (Task tasks : task){
-            print(tasks);
+        for (Task task : tasks){
+            print(task);
         }
+    }
+
+    public static void printSortedByPriority(List<Task> tasks){
+            printList(TaskSorter.sortByPriority(tasks));
+    }
+
+    public static void printSortedByTimeRemaining(List<Task> tasks){
+        printList(TaskSorter.sortByTimeRemaining(tasks));
+    }
+
+    public static void printFailedTasks(List<Task> tasks){
+        printList(TaskSorter.sortByStatusFailed(tasks));
     }
 }

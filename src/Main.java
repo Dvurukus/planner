@@ -18,12 +18,9 @@ public class Main {
         manager.addTask(task2);
         manager.addTask(task3);
 
-        List<Task> sortedByPriority = TaskSorter.sortByPriority(manager.getTasks());
-        TaskPrinter.printList(sortedByPriority);
-
         manager.statusDone(task1);
-        List<Task> sortedByStatus = TaskSorter.sortByStatusDone(manager.getTasks());
-        TaskPrinter.printList(sortedByStatus);
+
+        TaskPrinter.printSortedByPriority(manager.getTasks());
 
 
 
