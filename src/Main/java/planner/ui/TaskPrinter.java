@@ -8,7 +8,7 @@ import java.util.List;
 
 public class TaskPrinter {
 
-    public static String statusToText(Status status){
+    private static String statusToText(Status status){
         return switch (status){
             case TODO -> "Задача ещё не начата";
             case IN_PROGRESS -> "В процессе";
@@ -17,7 +17,7 @@ public class TaskPrinter {
         };
     }
 
-    public static String format(Task task){
+    private static String format(Task task){
          if (task.getStatus() == Status.TODO
         || task.getStatus() == Status.IN_PROGRESS) {
         return """
@@ -61,7 +61,7 @@ public class TaskPrinter {
          return " ";
     }
 
-    public static void print(Task task){                    //Печать одной задачи
+    private static void print(Task task){                    //Печать одной задачи
             System.out.println(format(task));
     }
 
@@ -83,7 +83,19 @@ public class TaskPrinter {
         printList(TaskSorter.sortByTimeRemaining(tasks));
     }
 
-    public static void printFailedTasks(List<Task> tasks){
+    public static void printTaskFailed(List<Task> tasks){
         printList(TaskSorter.sortByStatusFailed(tasks));
+    }
+
+    public static void printTaskDone(List<Task> tasks) {
+        printList(TaskSorter.sortByStatusDone(tasks));
+    }
+
+    public static void printTaskInProgress(List<Task> tasks){
+        printList(TaskSorter.sortByStatusInProgress(tasks));
+    }
+
+    public static void printTaskToDo(List<Task> tasks){
+        printList(TaskSorter.sortedByToDo(tasks));
     }
 }

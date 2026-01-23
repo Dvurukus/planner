@@ -24,6 +24,16 @@ public class Main {
 
 
 
+    Task task4 = new Task(73, "создать писюн", "", LocalDateTime.now().plusWeeks(4));
 
-    }
+    manager.addTask(task4);
+
+    TaskPrinter.printSortedByPriority(manager.getTasks());
+
+    Task task5 = new Task(1,"играть в валорант","", LocalDateTime.now().plusWeeks(1));
+
+    manager.addTask(task5);
+
+    TaskPrinter.printSortedByPriority(manager.getTasks());
+}
 }

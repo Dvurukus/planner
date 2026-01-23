@@ -19,6 +19,10 @@ public class TaskManager {
         tasks.add(task);
     }
 
+    public void removeTask (Task task){
+        tasks.remove(task);
+    }
+
     public void statusDone(Task task) {
         if (!tasks.contains(task)) return ;
         task.markDone(task);      

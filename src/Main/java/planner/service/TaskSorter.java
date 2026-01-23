@@ -72,8 +72,22 @@ public class TaskSorter {
         List<Task> copy = new ArrayList<>(tasks);
 
         for (Task task : tasks){
-            if (task.getStatus() == )
+            if (task.getStatus() == Status.IN_PROGRESS) {
+                sorted.add(task);
+            }
         }
+            return sorted;
+    }
 
+    public static List<Task> sortedByToDo(List<Task> tasks) {
+        List<Task> sorted = new ArrayList<>();
+        List<Task> copy = new ArrayList<>(tasks);
+
+        for (Task task : tasks) {
+            if(task.getStatus() == Status.TODO) {
+                sorted.add(task);
+            }
+        }
+            return sorted;
     }
 }
