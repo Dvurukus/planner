@@ -2,7 +2,9 @@ package Main.java.planner.service;
 
 import Main.java.planner.model.Status;
 import Main.java.planner.model.Task;
+import Main.java.planner.util.DateTimeUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -16,73 +18,33 @@ public class TaskSorter {
     }
 
     public static List<Task> sortByTimeRemaining(List<Task> tasks){                //Сортировка по оставшемуся времени
-        List<Task> sorted = new ArrayList<>();
-        List<Task> copy = new ArrayList<>(tasks);
-
-        while (!copy.isEmpty()) {
-            Task expires = copy.get(0);
-
-            for (Task task : copy) {
-                if (task.getUnFormattedDeadLine().isBefore(expires.getUnFormattedDeadLine())){
-                    expires = task;
-                }
-            }
-            sorted.add(expires);
-            copy.remove(expires);
-        }
-        return tasks.stream()
-        .sorted(Comparator
-            .comparing(Task::getUnFormattedTimeLeft
-                .isBefore(Task.getUnFormattedDeadLine))
-    .reversed()).toList();
-        
+        return tasks.stream().filter(
+                t -> t.getStatus() != Status.DONE && t.getStatus() != Status.FAIL)
+                .sorted(Comparator.comparing(Task::getUnFormattedDeadLine))
+                .toList();
     }
 
     public static List<Task> sortByStatusDone(List<Task> tasks){
-        List<Task> sorted = new ArrayList<>();
-        List<Task> copy = new ArrayList<>(tasks);
-
-        for (Task task : copy){
-            if(task.getStatus() == Status.DONE){
-                sorted.add(task);
-            }
-        }
-        return sorted;
+        return tasks.stream().filter(
+                t -> t.getStatus() == Status.DONE)
+                .toList();
     }
 
     public static List<Task> sortByStatusFailed(List<Task> tasks){
-        List<Task> sorted = new ArrayList<>();
-        List<Task> copy = new ArrayList<>(tasks);
-
-        for (Task task : copy){
-            if (task.getStatus() == Status.FAIL){
-                sorted.add(task);
-            }
-        }
-        return sorted;
+        return tasks.stream().filter(
+                        t -> t.getStatus() == Status.FAIL)
+                .toList();
     }
     
     public static List<Task> sortByStatusInProgress(List<Task> tasks){
-        List<Task> sorted = new ArrayList<>();
-        List<Task> copy = new ArrayList<>(tasks);
-
-        for (Task task : tasks){
-            if (task.getStatus() == Status.IN_PROGRESS) {
-                sorted.add(task);
-            }
-        }
-            return sorted;
+        return tasks.stream().filter(
+                        t -> t.getStatus() == Status.IN_PROGRESS)
+                .toList();
     }
 
     public static List<Task> sortedByToDo(List<Task> tasks) {
-        List<Task> sorted = new ArrayList<>();
-        List<Task> copy = new ArrayList<>(tasks);
-
-        for (Task task : tasks) {
-            if(task.getStatus() == Status.TODO) {
-                sorted.add(task);
-            }
-        }
-            return sorted;
+        return tasks.stream().filter(
+                        t -> t.getStatus() == Status.TODO)
+                .toList();
     }
 }

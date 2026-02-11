@@ -18,20 +18,23 @@ public class Main {
         manager.addTask(task2);
         manager.addTask(task3);
 
-        manager.statusDone(task1);
 
 
 
 
-    Task task4 = new Task(73, "создать писюн", "", LocalDateTime.now().plusWeeks(4));
+    Task task4 = new Task(73, "создать писюн", "Большой", LocalDateTime.now().plusWeeks(24));
 
     manager.addTask(task4);
 
 
-    Task task5 = new Task(1,"играть в валорант","", LocalDateTime.now().plusWeeks(1));
+    Task task5 = new Task(1,"играть в валорант","Сильно", LocalDateTime.now().plusWeeks(12));
 
     manager.addTask(task5);
 
-    TaskPrinter.printSortedByPriority(manager.getTasks());
+    manager.statusDone(task1);
+    manager.statusDone(task2);
+    manager.statusDone(task3);
+
+    TaskPrinter.printTaskDone(manager.getTasks());
 }
 }

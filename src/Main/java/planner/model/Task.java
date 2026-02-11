@@ -12,8 +12,8 @@ public class Task {
     private String description;                 //описание задачи
     private LocalDateTime createdAt;            //дата создания задачи
     private LocalDateTime deadLine;             //срок исполнения задачи
-    private Status status;  
-    private LocalDateTime complitedAt;              //статус поставленной задачи
+    private Status status;                      //статус поставленной задачи
+    private LocalDateTime complitedAt;          //дата выполнения задачи
 
 
 
