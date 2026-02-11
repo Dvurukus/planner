@@ -20,7 +20,6 @@ public class Main {
 
         manager.statusDone(task1);
 
-        TaskPrinter.printSortedByPriority(manager.getTasks());
 
 
 
@@ -28,7 +27,6 @@ public class Main {
 
     manager.addTask(task4);
 
-    TaskPrinter.printSortedByPriority(manager.getTasks());
 
     Task task5 = new Task(1,"играть в валорант","", LocalDateTime.now().plusWeeks(1));
 

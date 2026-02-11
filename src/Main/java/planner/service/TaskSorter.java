@@ -4,25 +4,15 @@ import Main.java.planner.model.Status;
 import Main.java.planner.model.Task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class TaskSorter {
 
     public static List<Task> sortByPriority(List<Task> tasks){                     //Сортировка по приоритету
-        List<Task> sorted = new ArrayList<>();
-        List<Task> copy = new ArrayList<>(tasks);
-
-        while (!copy.isEmpty()) {
-            Task maxPriority = copy.get(0);
-            for (Task task : copy) {
-                if (task.getPriority() > maxPriority.getPriority()) {
-                    maxPriority = task;
-                }
-            }
-            sorted.add(maxPriority);
-            copy.remove(maxPriority);
-        }
-        return sorted;
+        return tasks.stream()
+        .sorted(Comparator.comparing(Task::getPriority).reversed())
+        .toList();
     }
 
     public static List<Task> sortByTimeRemaining(List<Task> tasks){                //Сортировка по оставшемуся времени
@@ -40,7 +30,12 @@ public class TaskSorter {
             sorted.add(expires);
             copy.remove(expires);
         }
-        return sorted;
+        return tasks.stream()
+        .sorted(Comparator
+            .comparing(Task::getUnFormattedTimeLeft
+                .isBefore(Task.getUnFormattedDeadLine))
+    .reversed()).toList();
+        
     }
 
     public static List<Task> sortByStatusDone(List<Task> tasks){
